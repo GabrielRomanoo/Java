@@ -1,28 +1,29 @@
-public class Conta {
+public abstract class Conta {
+	
 	// Atributos abaixo (pode ser chamado de campo ou propriedade)
-	private double saldo; // Não é o ideal, tem perda de precisao. existem bibliotecas para guardar saldo
+	protected double saldo; // usar double no salario não é o ideal, tem perda de precisao. existem bibliotecas para guardar saldo
 	private int agencia; // Os atributos por default tem valores iguais a zero (menos a STRING)
 	private int numero;
 	private Cliente titular;	
-	private static int total; //precisa do static para que essa variavel seja igual para todos os objetos
+	private static int total; 
+	//precisa do static para que essa variavel seja igual para todos os objetos
 	//quando tem static, vira um atributo compartilhado da classe Conta, e nao de cada objeto
 	//quando tem static, o atributo é DA CLASSE
 	
-	//construtor (nao é um metodo, é uma rotina de inicialização) 
+	//construtor (nao é um metodo, é uma rotina de inicialização 
+	// NAO HERDA O CONSTRUTOR NAS FILHAS) 
 	public Conta(int agencia, int numero) {
 		//populando os atributos aqui embaixo
 		Conta.total++; //atributo de classe
 		//System.out.println("o total de contas é: " + Conta.total);
 		this.agencia = agencia; //atributo de instancia(objeto)
 		this.numero = numero;
-		//System.out.println("estou criando uma conta" + this.numero);
+		//System.out.println("estou criando uma conta " + this.numero);
 		
 	}
 	
 	//métodos (comportamentos abaixo)
-	public void deposita(double valor) { //void retorna nada
-		this.saldo += valor;
-	}
+	public abstract void deposita(double valor); ;//obriga filhos a implementar
 	
 	public boolean saca(double valor) {
 		if(this.saldo >= valor) {
@@ -33,24 +34,25 @@ public class Conta {
 	}
 	
 	public boolean transfere(double valor, Conta destino) {
-		if(this.saldo >= valor) {
-			//this.saldo -= valor;
-			this.saca(valor);
+		if(this.saca(valor)) {  //vai chamar o metodo saca específico da classe que foi invocada
+			//o this acima aponta para o objeto que a chamou
 			destino.deposita(valor);
 			return true;
 		}
 		return false;
 	}
 	
+	// nao precisa ter o setSaldo, pois ja temos os metodos saca, deposita e transfere
 	public double getSaldo( ) {
-		return this.saldo; // nao precisa ter o setSaldo, pois ja temos os metodos saca, deposita e transfere
+		return this.saldo; 
 	}
 	
 	public int getNumero() {
 		return this.numero;
 	}
 	
-	public void setNumero(int numero) { // normalmente metodos que alteram atributo sao void
+	// normalmente metodos que alteram atributo sao void
+	public void setNumero(int numero) {
 		if (numero <= 0) {
 			System.out.println("nao pode valor <= 0");
 			return; //para a execução
@@ -88,6 +90,7 @@ public class Conta {
 	public static int getTotal() {
 		return Conta.total;
 	}
+	
 	
 	
 	 

@@ -13,6 +13,11 @@ public class TestaValores {
 		
 				
 		//System.out.println(Conta.total); //se nao fosse privado
-		System.out.println(conta2.getTotal());
+		//abaixo é para codigo do getTotal sem o staic 
+		//System.out.println("total de contas: " + conta2.getTotal()); 
+		//mesmo sendo a conta2, ele imprime 3, porque é um atributo compartilhado
+		
+		System.out.println("total de contas: " + Conta.getTotal()); 
+		
 	}
 }
