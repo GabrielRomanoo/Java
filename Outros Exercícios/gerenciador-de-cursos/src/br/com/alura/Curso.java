@@ -1,10 +1,16 @@
 package br.com.alura;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
+/*
+ * List é uma sequência e aceita elementos duplicados. Set não aceita duplicados e não define ordem.
+ */
 
 public class Curso {
 	
@@ -12,6 +18,9 @@ public class Curso {
 	private String instrutor; //poderia fazer uma classe instrutor
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private Set<Aluno> alunos = new HashSet<Aluno>();
+//	private Set<Aluno> alunos = new LinkedHashSet<Aluno>(); //mantem a ordem de inserção, mas nao podemos acessar com um get(index)
+	private Map<Integer, Aluno> matriculaParaAluno = new HashMap<>(); //hashmap usa do hashcode por ser tipo hash
+//	private Map<Integer, Aluno> matriculaParaAluno = new LinkedHashMap<>(); //preserva a ordem de inserção
 	
 	public String getNome() {
 		return nome;
@@ -53,11 +62,33 @@ public class Curso {
 
 	public void matricula(Aluno aluno) {
 		this.alunos.add(aluno);
+		this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
 	}
 	
 	public Set<Aluno> getAlunos() {
 		return Collections.unmodifiableSet(alunos);
 	}
+
+	public boolean estaMatriculado(Aluno aluno) {
+		return this.alunos.contains(aluno); //contains de set utiliza do equals + hash code
+		
+	}
+
+	public Aluno BuscaMatriculado(int numero) {
+//		for (Aluno aluno : alunos) {
+//			if (aluno.getNumeroMatricula() == numero) {
+//				return aluno;
+//			}
+//		}
+//		//return null; //má prática, ideal lançar uma exception
+//		throw new NoSuchElementException("matricula não encontrada " + numero);
+
+		if (!matriculaParaAluno.containsKey(numero)) {
+			throw new NoSuchElementException("matricula não encontrada " + numero);
+		}
+		return this.matriculaParaAluno.get(numero);
+	}
+	
 	
 
 }
