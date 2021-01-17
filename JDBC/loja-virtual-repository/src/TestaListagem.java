@@ -1,5 +1,4 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,10 +7,11 @@ public class TestaListagem {
 
 	public static void main(String[] args) throws SQLException {
 		
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC", "root", "root");
+		ConnectionFactory connectionFactory = new ConnectionFactory(); //poderia ter criado o metodo de forma estatica
 		
+		Connection connection = connectionFactory.recuperarConexao();		
 		//crio a query
-		Statement stm = con.createStatement(); //statement no java sao os comandos no sql
+		Statement stm = connection.createStatement(); //statement no java sao os comandos no sql
 		
 		//executo a query
 		stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO"); //para select, o execute devolve true. para delete, uptade, alter, ele devolve false
@@ -28,6 +28,6 @@ public class TestaListagem {
 			System.out.println(descricao);
 		}
 		
-		con.close();
+		connection.close();
 	}
 }
