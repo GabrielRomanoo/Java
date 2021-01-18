@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.management.RuntimeErrorException;
+
 public class TestaInsercaoComParametro {
 
 	public static void main(String[] args) throws SQLException {
@@ -14,15 +16,39 @@ public class TestaInsercaoComParametro {
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 		Connection connection = connectionFactory.recuperarConexao();
 		
-		//com o preparedstatement, o jdbc faz a validação do comando sql, a fim de nao ter possiveis erros nos parametros passados
-
-		PreparedStatement stm = connection
-				.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)",
-				Statement.RETURN_GENERATED_KEYS);  //novo paramentro para retornar o id do produto inserido
+		connection.setAutoCommit(false); //tira a responsabilidade de commitar do jdbc
 		
+		try {
+			//com o preparedstatement, o jdbc faz a validação do comando sql, a fim de nao ter possiveis erros nos parametros passados	
+			
+			PreparedStatement stm = connection
+					.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)",
+							Statement.RETURN_GENERATED_KEYS);  //novo paramentro para retornar o id do produto inserido
+			
+			adicionar("SmartTV", "45 polegadas", stm);
+			adicionar("Radio", "Radio de bateria", stm);
+			
+			connection.commit();
+					
+			stm.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("ROLLBACK EXECUTADO");
+			connection.rollback();			
+		}
+		connection.close();
+	}
+
+	private static void adicionar(String nome, String descricao, PreparedStatement stm)
+			throws SQLException {
 		stm.setString(1, nome);
 		stm.setString(2, descricao);
 
+		/*
+		if (nome.equals("Radio")) {
+			throw new RuntimeException("Não foi possivel adicionar o produto");
+		} */
+		
 		stm.execute(); 
 		
 		ResultSet rst = stm.getGeneratedKeys();
@@ -32,6 +58,6 @@ public class TestaInsercaoComParametro {
 			System.out.println("O id criado foi: " + id);
 		}
 
-		connection.close();
+		rst.close();
 	}
 }

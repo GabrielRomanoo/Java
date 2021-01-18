@@ -30,6 +30,6 @@ public class TestaListagem {
 			System.out.println(descricao);
 		}
 		
-		connection.close();
+		resultado.close();
 	}
 }
