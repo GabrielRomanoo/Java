@@ -1,7 +1,7 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaListagem {
 
@@ -11,10 +11,12 @@ public class TestaListagem {
 		
 		Connection connection = connectionFactory.recuperarConexao();		
 		//crio a query
-		Statement stm = connection.createStatement(); //statement no java sao os comandos no sql
+//		Statement stm = connection.createStatement(); //statement no java sao os comandos no sql
+		PreparedStatement stm = connection.prepareStatement("SELECT ID, NOME, DESCRICAO FROM PRODUTO"); //statement no java sao os comandos no sql
+
 		
 		//executo a query
-		stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO"); //para select, o execute devolve true. para delete, uptade, alter, ele devolve false
+		stm.execute(); //para select, o execute devolve true. para delete, uptade, alter, ele devolve false
 		
 		//pego o resultado
 		ResultSet resultado = stm.getResultSet();
