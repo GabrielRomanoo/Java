@@ -13,12 +13,14 @@ public class ConnectionFactory {
 	
 	/* criando o pool de conexões e configurando */
 	public ConnectionFactory() {
-		ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
+		ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource(); // c3p0
 		comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC");
 		comboPooledDataSource.setUser("root");
 		comboPooledDataSource.setPassword("root");
 		
-		this.dataSource = comboPooledDataSource;
+		comboPooledDataSource.setMaxPoolSize(15); //numero maximo de conexoes no pool
+		
+		this.dataSource = comboPooledDataSource; 
 	}
 	
 	public Connection recuperarConexao() throws SQLException {
