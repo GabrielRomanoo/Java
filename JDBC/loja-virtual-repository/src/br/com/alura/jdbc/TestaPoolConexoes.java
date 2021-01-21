@@ -2,6 +2,8 @@ package br.com.alura.jdbc;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import br.com.alura.jdbc.factory.ConnectionFactory;
+
 public class TestaPoolConexoes {
 
 	public static void main(String[] args) throws SQLException {

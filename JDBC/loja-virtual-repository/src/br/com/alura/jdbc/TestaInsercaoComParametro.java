@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import br.com.alura.jdbc.factory.ConnectionFactory;
+
 /*
  * Por que, ao utilizar o try-with-resources, não é mais necessário explicitar o close para fechar o statements (ResultSet, Connection, PreparedStatement)?
  * Estendendo o AutoCloseable, o try-with-resources executa o método close sem que precise estar explícito.
