@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.alura.jdbc.modelo.Categoria;
 import br.com.alura.jdbc.modelo.Produto;
 
 /* DAO é um patterns, um padrão de projeto */
@@ -45,6 +46,27 @@ public class ProdutoDAO {
 
 		try (PreparedStatement stm = connection.prepareStatement(sql)) {
 
+			stm.execute();
+
+			try (ResultSet rst = stm.getResultSet()) {
+
+				while (rst.next()) {
+					Produto produto = new Produto(rst.getInt(1), rst.getString(2), rst.getString(3));
+					produtos.add(produto);
+				}
+			}
+		}
+		return produtos;
+	}
+	
+	public List<Produto> buscar(Categoria categoria) throws SQLException {
+		List<Produto> produtos = new ArrayList<Produto>();
+
+		String sql = "SELECT ID, NOME, DESCRICAO FROM PRODUTO WHERE CATEGORIA_ID = ?";
+
+		try (PreparedStatement stm = connection.prepareStatement(sql)) {
+
+			stm.setInt(1, categoria.getId());
 			stm.execute();
 
 			try (ResultSet rst = stm.getResultSet()) {
