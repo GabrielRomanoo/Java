@@ -1,9 +1,11 @@
 package br.com.alura.jpa.modelo;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Categoria {
 
 	@Id
@@ -11,6 +13,13 @@ public class Categoria {
 	private Long id;
 	private String nome;
 	
+	@Deprecated //para mostrar que este construtor nao deve ser usado por nos, e esta aqui apenas para fim do hibernate, fim de infraestrutura
+	public Categoria() { //o hibernate precisa ter o construtor padrao
+	}
+	
+	public Categoria(String nome) {
+		this.nome = nome;
+	}
 	public Long getId() {
 		return id;
 	}

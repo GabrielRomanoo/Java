@@ -8,8 +8,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>br.com.alura.jpa.modelo.Conta</class>
 		<class>br.com.alura.jpa.modelo.Movimentacao</class>
+		<class>br.com.alura.jpa.modelo.Categoria</class>
+		<class>br.com.alura.jpa.modelo.Cliente</class>
+		
         
-
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/alura_jpa?useTimezone=true&amp;serverTimezone=UTC "/>
