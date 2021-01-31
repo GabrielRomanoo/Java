@@ -17,9 +17,15 @@ public class Categoria {
 	public Categoria() { //o hibernate precisa ter o construtor padrao
 	}
 	
-	public Categoria(String nome) {
+	public Categoria(String nome) { //se criamos um construtor, temos que explicitar o construtor padrao sem nada, para o hibernate poder usar
 		this.nome = nome;
 	}
+	
+	@Override
+	public String toString() {
+		return nome + " - " + id;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -32,4 +38,5 @@ public class Categoria {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 }
