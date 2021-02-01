@@ -1,9 +1,13 @@
 package br.com.alura.jpa.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity //Para indicar para jpa que a classe é uma entidade, uma tabela dentro do banco de dados.
 public class Conta {
@@ -15,7 +19,12 @@ public class Conta {
 	private Integer agencia;
 	private Integer numero;
 	private Double saldo;
-
+	
+	@OneToMany(mappedBy = "conta") //mapeamento bidirecional, espelho. dizemos para a jpa que este relacionamento ja esta mapeado na outra ponta, em movimentacao @ManyToOne da classe Movimentacao
+	private List<Movimentacao> movimentacoes; //a conta conhece todas as suas movimentacoes 
+	// com o mappedby conseguimos manter o @OneToMany apenas como um espelho (bidirecional) evitando que ele crie duas vezes o relacionamento no banco(chave estrangeira e tabela de relacionamento)
+	// o atributo movimentacoes é o lado fraco, pois nao causa nenhuma mudança no banco. quem possui a chave estrangeira é a entidade movimentacao, que possui o atributo conta (lado forte)
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,5 +63,9 @@ public class Conta {
 
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
+	}
+
+	public List<Movimentacao> getMovimentacoes() {
+		return this.movimentacoes;
 	}
 }

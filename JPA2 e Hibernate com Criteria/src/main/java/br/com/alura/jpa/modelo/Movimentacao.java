@@ -33,7 +33,7 @@ public class Movimentacao {
 	
 	/* CARDINALIDADE */
 	@ManyToOne //indicamos para jpa que podem existir varias movimentações pra uma conta (ou uma conta pode ter varias movimentações)
-	private Conta conta;
+	private Conta conta; //muitas movimentacoes para uma conta
 	
 	@ManyToMany //a movimentação tem varias categorias e essas varias categorias podem pertencer a varias movimentacoes
 	private List<Categoria> categorias;
