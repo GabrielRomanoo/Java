@@ -1,5 +1,8 @@
 package br.com.alura.jpa.testes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,7 +25,7 @@ public class TestaMovimentacaoConta {
 		
 		System.out.println("qtde movimentacoes: " + quantidadeDeMovimentacoes);
 		System.out.println("titular da conta: " + conta.getTitular());
+		System.out.println("lista movimentacoes: " + conta.getMovimentacoes());
 		em.close();
 	}
-
 }

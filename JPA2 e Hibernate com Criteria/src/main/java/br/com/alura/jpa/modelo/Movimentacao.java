@@ -24,7 +24,6 @@ public class Movimentacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //auto-incremento para a chave primaria
 	private Long id;
 	
-	
 	@Enumerated(EnumType.STRING) //dizemos para a jpa que queremos persistir a string dessa enum
 	private TipoMovimentacao tipoMovimentacao;
 	private String descricao;
