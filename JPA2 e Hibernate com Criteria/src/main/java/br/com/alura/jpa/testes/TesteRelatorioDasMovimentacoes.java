@@ -15,7 +15,8 @@ public class TesteRelatorioDasMovimentacoes {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("alura");
 		EntityManager em = emf.createEntityManager();
 		
-		String jpql = "SELECT c FROM Conta c";
+//		String jpql = "SELECT c FROM Conta c"; // nesta consulta, temos um cenário de n+1 queries para cada conta, pois elas ainda tem as buscas das movimentacoes de cada conta
+		String jpql = "SELECT DISTINCT c FROM Conta c left join fetch c.movimentacoes"; //o join fetch faz o hibernate trazer alem das contas, traz todas as movimentacoes da conta de uma vez, sem o n+1 (buscar uma movimentacao de cada vez)
 		TypedQuery<Conta> query = em.createQuery(jpql, Conta.class);
 		
 		List<Conta> contas = query.getResultList();
