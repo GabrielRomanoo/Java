@@ -13,8 +13,12 @@ import br.com.alura.jpa.modelo.dao.MovimentacaoDao;
 public class TestaMediaDiariaDasMovimentacoesComDataProjecao {
 
 	public static void main(String[] args) {
+		
+		//INJEÇÃO DE DEPENDENCIAS
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("alura"); //podeira tirar este codigo e encapsular em outro lugar
+		EntityManager em = emf.createEntityManager(); 
 
-		List<MediaComData> movimentacoes = new MovimentacaoDao().getMediaDiariaDasMovimentacoes();
+		List<MediaComData> movimentacoes = new MovimentacaoDao(em).getMediaDiariaDasMovimentacoes();
 
 		for (MediaComData resultado : movimentacoes) {
 			System.out.println("A media das movimentacoes do dia " + resultado.getDia() + "/" + resultado.getMes()

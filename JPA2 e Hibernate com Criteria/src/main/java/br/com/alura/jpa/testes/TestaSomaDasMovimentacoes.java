@@ -14,8 +14,10 @@ import br.com.alura.jpa.modelo.dao.MovimentacaoDao;
 public class TestaSomaDasMovimentacoes {
 
 	public static void main(String[] args) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("alura"); //podeira tirar este codigo e encapsular em outro lugar
+		EntityManager em = emf.createEntityManager(); 
 	
-		BigDecimal somaDasMovimentacoes = new MovimentacaoDao().getSomaDasMovimentacoes();
+		BigDecimal somaDasMovimentacoes = new MovimentacaoDao(em).getSomaDasMovimentacoes();
 		
 		System.out.println("A soma das movimentacoes é: " + somaDasMovimentacoes);
 		
