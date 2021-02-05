@@ -20,8 +20,8 @@ public class MovimentacaoDao {
 	}
 
 	public List<MediaComData> getMediaDiariaDasMovimentacoes() {
-		String jpql = "select new br.com.alura.jpa.modelo.MediaComData(avg(m.valor), day(m.data), month(m.data)) from Movimentacao m group by day(m.data), month(m.data), year(m.data)";
-		TypedQuery<MediaComData> query = em.createQuery(jpql, MediaComData.class);
+//		String jpql = "select new br.com.alura.jpa.modelo.MediaComData(avg(m.valor), day(m.data), month(m.data)) from Movimentacao m group by day(m.data), month(m.data), year(m.data)";
+		TypedQuery<MediaComData> query = em.createNamedQuery("mediaDiariaMovimentacoes", MediaComData.class);
 
 		// a jpql nos permite instanciar objetos direto na query
 		// para cada resultado da query, é instanciado um objetio MediaComData
