@@ -17,7 +17,7 @@ public class TestaMovimentacaoConta {
 		EntityManager em = emf.createEntityManager();
 		
 		//buscar a primeira movimentacao 
-		Movimentacao movimentacao = em.find(Movimentacao.class, 3L); //o metodo find devolve uma entidade no estado maneged
+		Movimentacao movimentacao = em.find(Movimentacao.class, 1L); //o metodo find devolve uma entidade no estado maneged
 		Conta conta = movimentacao.getConta();
 		
 		//buscar a quantidade de movimentacoes da conta

@@ -18,7 +18,7 @@ public class TesteJPQL {
 		EntityManager em = emf.createEntityManager();
 		
 		Conta conta = new Conta();
-		conta.setId(2L);
+		conta.setId(6L);
 		
 //		String sql = "select * from movimentacao where conta_id =2";
 //		String jpql = "select m from Movimentacao m where m.conta.id =2";

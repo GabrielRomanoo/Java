@@ -32,7 +32,7 @@ public class TestaSomaDasMovimentacoes {
 		CriteriaQuery<BigDecimal> query = builder.createQuery(BigDecimal.class);
 		
 		// select m from Movimentacao m
-		Root<Movimentacao> root = query.from(Movimentacao.class);
+		Root<Movimentacao> root = query.from(Movimentacao.class); //Root é quem define qual entidade estamos buscando, como se fosse a clausula from do SQL
 		
 		//sum(m.valor)
 		Expression<BigDecimal> sum = builder.sum(root.<BigDecimal>get("valor"));
@@ -42,7 +42,7 @@ public class TestaSomaDasMovimentacoes {
 		
 		TypedQuery<BigDecimal> typedQuery = em.createQuery(query);
 		
-		System.out.println("A soma das movimentacoes é: " +typedQuery.getSingleResult());
+		System.out.println("A soma das movimentacoes é: " + typedQuery.getSingleResult());
 	}
 
 }

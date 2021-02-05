@@ -15,7 +15,7 @@ public class CriaConta {
 		
 		Conta conta = new Conta();
 		conta.setTitular("Leonardo");
-		conta.setNumero(1234);
+		conta.setNumero(1235);
 		conta.setAgencia(4321);
 		
 		//na jpa, nao vem por padrao o autocommit, como no jdbc

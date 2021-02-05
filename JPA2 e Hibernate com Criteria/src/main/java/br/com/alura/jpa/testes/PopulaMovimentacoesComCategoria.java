@@ -21,7 +21,7 @@ public class PopulaMovimentacoesComCategoria {
 		EntityManager em = emf.createEntityManager();
 
         Categoria categoria1 = new Categoria("Viagem");
-        Categoria categoria2 = new Categoria("NegÃ³cios");
+        Categoria categoria2 = new Categoria("Negócios");
 
         Conta conta = new Conta();
         conta.setTitular("Maria");
@@ -37,7 +37,7 @@ public class PopulaMovimentacoesComCategoria {
 
         Movimentacao movimentacao1 = new Movimentacao();
         movimentacao1.setData(LocalDateTime.now()); // hoje
-        movimentacao1.setDescricao("Viagem Ã  SP");
+        movimentacao1.setDescricao("Viagem á SP");
         movimentacao1.setTipoMovimentacao(TipoMovimentacao.SAIDA);
         movimentacao1.setValor(new BigDecimal(100.0));
         movimentacao1.setCategorias(Arrays.asList(categoria1));
