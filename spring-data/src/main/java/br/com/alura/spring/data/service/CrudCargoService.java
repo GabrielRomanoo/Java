@@ -11,10 +11,10 @@ import br.com.alura.spring.data.repository.CargoRepository;
 public class CrudCargoService {
 
 	private boolean system = true;
-	private final CargoRepository repository;
+	private final CargoRepository cargoRepository;
 
 	public CrudCargoService(CargoRepository repository) {
-		this.repository = repository;
+		this.cargoRepository = repository;
 	}
 
 	public void inicial(Scanner scanner) {
@@ -23,7 +23,9 @@ public class CrudCargoService {
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
-
+			System.out.println("3 - Visualizar");
+			System.out.println("4 - Deletar");
+			
 			int action = scanner.nextInt();
 
 			switch (action) {
@@ -33,6 +35,12 @@ public class CrudCargoService {
 			case 2:
 				atualizar(scanner);
 				break;
+			case 3:
+				visualizar();
+				break;
+			case 4:
+				deletar(scanner);
+				break;
 			default:
 				system = false;
 				break;
@@ -41,13 +49,26 @@ public class CrudCargoService {
 		}
 	}
 
+	private void deletar(Scanner scanner) {
+		System.out.println("Digite o id do cargo");
+		int id = scanner.nextInt();
+
+		cargoRepository.deleteById(id);
+		System.out.println("deletado");
+	}
+
+	private void visualizar() {
+		Iterable<Cargo> cargos = cargoRepository.findAll();
+		cargos.forEach(cargo -> System.out.println(cargo));
+	}
+
 	private void salvar(Scanner scanner) {
 		System.out.println("Digite a descricao do cargo");
 		String descricao = scanner.next();
 		Cargo cargo = new Cargo();
 		cargo.setDescricao(descricao);
-		repository.save(cargo);
-		System.out.println("salvo");
+		cargoRepository.save(cargo);
+		System.out.println("atualizado");
 	}
 
 	private void atualizar(Scanner scanner) {
@@ -59,7 +80,7 @@ public class CrudCargoService {
 		Cargo cargo = new Cargo();
 		cargo.setId(id);
 		cargo.setDescricao(descricao);
-		repository.save(cargo); // o metodo save quando informado o id, ele atualiza o registro
+		cargoRepository.save(cargo); // o metodo save quando informado o id, ele atualiza o registro
 		System.out.println("salvo");
 
 	}
