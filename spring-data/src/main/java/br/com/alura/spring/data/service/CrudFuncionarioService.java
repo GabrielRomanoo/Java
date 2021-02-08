@@ -15,16 +15,16 @@ import br.com.alura.spring.data.repository.FuncionarioRepository;
 import br.com.alura.spring.data.repository.UnidadeTrabalhoRepository;
 
 @Service
-public class CurdFuncionarioService {
+public class CrudFuncionarioService {
 
 	private boolean system = true;
-	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private final FuncionarioRepository funcionarioRepository;
 	private final CargoRepository cargoRepository;
 	private final UnidadeTrabalhoRepository unidadeTrabalhoRepository;
 	
-	public CurdFuncionarioService(FuncionarioRepository funcionarioRepository,
+	public CrudFuncionarioService(FuncionarioRepository funcionarioRepository,
 			 CargoRepository cargoRepository, UnidadeTrabalhoRepository unidadeTrabalhoRepository) {
 		this.funcionarioRepository = funcionarioRepository;
 		this.cargoRepository = cargoRepository;
@@ -89,7 +89,7 @@ public class CurdFuncionarioService {
 		System.out.println("Digite o salario");
 		Double salario = scanner.nextDouble();
 		
-		System.out.println("Digite a data de contracao");
+		System.out.println("Digite a data de contratacao");
 		String data = scanner.next();
 		
 		System.out.println("Digite o cargoId");
@@ -121,7 +121,7 @@ public class CurdFuncionarioService {
 		System.out.println("Digite o salario");
 		Double salario = scanner.nextDouble();
 		
-		System.out.println("Digite a data de contracao");
+		System.out.println("Digite a data de contratacao");
 		String data = scanner.next();
 		
 		System.out.println("Digite o cargoId");

@@ -8,12 +8,12 @@ import br.com.alura.spring.data.orm.UnidadeTrabalho;
 import br.com.alura.spring.data.repository.UnidadeTrabalhoRepository;
 
 @Service
-public class CrudUnidadeTrabalho {
+public class CrudUnidadeTrabalhoService {
 
 	private boolean system = true;
 	private final UnidadeTrabalhoRepository unidadeTrabalhoRepository;
 
-	public CrudUnidadeTrabalho(UnidadeTrabalhoRepository unidadeTrabalhoRepository) {
+	public CrudUnidadeTrabalhoService(UnidadeTrabalhoRepository unidadeTrabalhoRepository) {
 		this.unidadeTrabalhoRepository = unidadeTrabalhoRepository;
 	}
 
