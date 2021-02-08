@@ -28,13 +28,14 @@ public class SpringDataApplication implements CommandLineRunner {
 	@Override //apos o fim do metodo main, esse metodo sera rodado
 	public void run(String... args) throws Exception {
 		
+		/* Pegando os dados do usuario */
 		Scanner scanner = new Scanner(System.in);
 		
 		while (system) {
 			System.out.println("Qual acao voce quer executar?");
 			System.out.println("0 - Sair");
-			System.out.println("1 - Inserir");
-			System.out.println("2 - Atualizar");
+			System.out.println("1 - Cargo");
+			
 			
 			int action = scanner.nextInt();
 			
