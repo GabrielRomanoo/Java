@@ -68,7 +68,7 @@ public class CrudCargoService {
 		Cargo cargo = new Cargo();
 		cargo.setDescricao(descricao);
 		cargoRepository.save(cargo);
-		System.out.println("atualizado");
+		System.out.println("salvo");
 	}
 
 	private void atualizar(Scanner scanner) {
@@ -81,7 +81,7 @@ public class CrudCargoService {
 		cargo.setId(id);
 		cargo.setDescricao(descricao);
 		cargoRepository.save(cargo); // o metodo save quando informado o id, ele atualiza o registro
-		System.out.println("salvo");
+		System.out.println("atualizado");
 
 	}
 }
