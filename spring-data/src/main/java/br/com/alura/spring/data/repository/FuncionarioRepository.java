@@ -15,10 +15,11 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Integ
 	// Derived Query (query's geradas pelo framework spring)
 	List<Funcionario> findByNome(String nome);
 	
-	// JPQL
+	// @Query (usando JPQL)
+	
 	@Query("SELECT f FROM Funcionario f WHERE f.nome = :nome "
 			+ "AND f.salario >= :salario AND f.dataContratacao = :data")
-	List<Funcionario> findNomeSalarioMaiorDataContratacao(String nome, Double Salario, LocalDate data);
+	List<Funcionario> findNomeSalarioMaiorDataContratacao(String nome, Double salario, LocalDate data);
 	
 	// variação usando Derived Query
 	List<Funcionario> findByNomeAndSalarioGreaterThanAndDataContratacao(String nome, Double Salario, LocalDate data);
@@ -27,9 +28,55 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Integ
 
 /* ANOTAÇÕES ABAIXO */
 
-/* Exemplos de derived queries: */
+/* 
+ * Derived Query x @Query
+ * 
+ * Aprendemos que ao usar o Derived Query Methods o JPQL é gerado dinamicamente 
+ * (ou derivado) baseado no nome do método. Não mostramos, 
+ * mas claro que isso também funciona para consultas que acessam os relacionamentos!
+ * 
+ * Por exemplo, veja o método abaixo onde estamos procurando funcionários 
+ * pela descrição do cargo:
+ * 
+ * //deve estar no repositório do funcionário
+ * List<Funcionario> findByCargoDescricao(String descricao);
+ * 
+ * Repare que usamos findBy para depois definir o caminho no relacionamento 
+ * CargoDescricao (a descrição é um atributo dentro do Cargo). 
+ * 
+ * O método é análogo ao JPQL abaixo:
+ * 
+ * @Query("SELECT f FROM Funcionario f JOIN f.cargo c WHERE c.descricao = :descricao")
+ * List<Funcionario> findByCargoPelaDescricao(String descricao);
+ * 
+ * Agora imagina se precisa pesquisar pela descrição mas da UnidadeTrabalho. 
+ * A primeira ideia seria usar o nome findByUnidadeTrabalhosDescricao(String descricao) 
+ * 
+ * No entanto temos o problema que o nome da entidade UnidadeTrabalho 
+ * é composto de duas palavras. Para separar claramente o nome da entidade do 
+ * atributo devemos usar o caracter _. Veja a assinatura do método então:
+ * 
+ * List<Funcionario> findByUnidadeTrabalhos_Descricao(String descricao);
+ * 
+ * Também analisa a mesma pesquisa com JPQL e @Query:
+ * 
+ * @Query("SELECT f FROM Funcionario f JOIN f.unidadeTrabalhos u WHERE u.descricao = :descricao")
+ * List<Funcionario> findByUnidadeTrabalhos_Descricao(String descricao);
+ * 
+ * Repare que nesse exemplo, bastante simples ainda, o nome do método já cresceu 
+ * e usa uma nomenclatura fora do padrão Java. 
+ * Isso é uma desvantagem dos Derived Query Methods.
+ * 
+ * Caso precise de consultas um pouco mais complexas, 
+ * por exemplo usando relacionamentos e vários parâmetros, 
+ * dê a preferência aos métodos com @Query para não prejudicar o entendimento 
+ * pois os nomes dos métodos vão ficar muito longos para definir 
+ * todos os critérios de busca. 
+ */
 
-/*
+/* Exemplos de derived queries: 
+ * 
+ * 
  * Usando Like 
  * 
  * Para executar um like (e não um equals, como no exemplo), use:
