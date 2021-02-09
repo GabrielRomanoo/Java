@@ -32,6 +32,12 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Integ
 
 /* ANOTAÇÕES ABAIXO */
 
+/*
+ * Derived Queries - queries criadas através de comandos Java
+ * JPQL - queries criadas através de uma estrutura SQL, porém com os nomes das entidades Java
+ * Native Query - queries padrões SQL que conseguimos executar no nosso Client SQL
+ */
+
 /* 
  * Derived Query x @Query
  * 
