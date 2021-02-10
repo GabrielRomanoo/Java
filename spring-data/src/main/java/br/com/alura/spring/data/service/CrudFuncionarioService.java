@@ -80,6 +80,10 @@ public class CrudFuncionarioService {
 		Integer page = scanner.nextInt();
 		
 		Pageable pageable = PageRequest.of(page, 5, Sort.unsorted()); //pagina a ser retornada, qtde de elementos para cada pagina, tipo de ordenacao
+//		Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC)); //igual a linha de cima mas ordenado de forma crescente
+//		Pageable pageable = PageRequest.of(page, 5, Sort.unsorted()); //igual a linha de cima mas ordenado de forma decrescente
+
+		
 		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
 		
 		System.out.println("Numero de paginas: " + funcionarios);

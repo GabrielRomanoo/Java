@@ -3,18 +3,23 @@ package br.com.alura.spring.data.repository;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.alura.spring.data.orm.Funcionario;
+import br.com.alura.spring.data.orm.FuncionarioProjecao;
 
 @Repository
 //public interface FuncionarioRepository extends CrudRepository<Funcionario, Integer> {
 public interface FuncionarioRepository extends PagingAndSortingRepository<Funcionario, Integer> {
 	// Derived Query (query's geradas pelo framework spring)
-	List<Funcionario> findByNome(String nome);
+	List<Funcionario> findByNome(String nome); //usando CrudRepository
+	
+	//novo método com paginação
+    List<Funcionario> findByNome(String nome, Pageable pageable);
 	
 	// @Query (usando JPQL)
 	
@@ -29,6 +34,11 @@ public interface FuncionarioRepository extends PagingAndSortingRepository<Funcio
 	@Query(value = "SELECT * FROM funcionarios f WHERE f.data_contratacao >= :data",
 			nativeQuery = true)
 	List<Funcionario> findDataContratacaoMaior(LocalDate data);
+	
+	// query usando projecao
+	@Query(value = "SELECT f.id, f.nome. f.salario FROM Funcinoarios f ", 
+			nativeQuery = true)
+	List<FuncionarioProjecao> findFuncionarioSalario();
 }
 
 /* ANOTAÇÕES ABAIXO */
