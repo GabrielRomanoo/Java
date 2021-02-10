@@ -36,7 +36,7 @@ public interface FuncionarioRepository extends PagingAndSortingRepository<Funcio
 	List<Funcionario> findDataContratacaoMaior(LocalDate data);
 	
 	// query usando projecao
-	@Query(value = "SELECT f.id, f.nome. f.salario FROM Funcinoarios f ", 
+	@Query(value = "SELECT f.id, f.nome, f.salario FROM funcionarios f", 
 			nativeQuery = true)
 	List<FuncionarioProjecao> findFuncionarioSalario();
 }
