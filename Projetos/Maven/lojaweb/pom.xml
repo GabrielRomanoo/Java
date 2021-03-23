@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.1</version> <!-- vai usar como versao a 1.4.1, mesmo em produtos sendo 1.4.15-->
+			<version>1.4.16</version> <!-- vai usar como versao a 1.4.1, mesmo em produtos sendo 1.4.15-->
 			<exclusions>
 				<exclusion>
 					<groupId>xmlpull</groupId>
