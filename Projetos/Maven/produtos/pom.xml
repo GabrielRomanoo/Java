@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.15</version> <!-- se nao tem o scope (escopo), entao essa dependencia é pra aplicacao 
+			<version>1.4.17</version> <!-- se nao tem o scope (escopo), entao essa dependencia é pra aplicacao 
 				inteira -->
 		</dependency>
 
